@@ -1,0 +1,19 @@
+.address-card{
+
+    background-color: rgba(0, 0, 0, 0.06);
+    margin-bottom: 1em;
+}
+
+.address-card.IsActive{
+    background-color:#00800080;
+}
+
+.address-card-buttons{
+margin-bottom:1em;
+}
+
+.addAddressBtn{
+    color: green;
+    cursor: pointer;
+    margin-left: 0.5em;
+}

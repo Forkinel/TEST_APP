@@ -1,0 +1,12 @@
+.select-company-item{
+    padding: 5px;
+}
+
+.select-company-item:hover 
+{
+    
+cursor: pointer;
+transition: font-size 0.25s;
+font-weight:bold;
+
+}

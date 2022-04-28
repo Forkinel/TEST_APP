@@ -1,0 +1,74 @@
+
+    <!-- <div> ID = {{TestID}}</div> -->
+    <p *ngIf="!dataLoaded">Loading data ...</p>
+
+    <!-- Template driven form -->
+    <form #detailsForm="ngForm" *ngIf="dataLoaded | async" (ngSubmit)="Save(detailsForm.value)">
+        
+    
+        <div class="row">       
+
+            <div class=col-md-5>
+                <mat-checkbox name="IsActive" class="example-margin" [(ngModel)]="detailsModel.IsActive"
+                [labelPosition]="after">
+                Active
+            </mat-checkbox>              
+            </div>
+            <div class="col-md-6">
+                <button mat-raised-button color="primary" type="submit" style="float:right"
+                    [disabled]="!detailsForm.form.valid">Save</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width" style="width:100%;">
+                    <input matInput placeholder="TestName" [(ngModel)]="detailsModel.TestName" name="Name" required>
+                </mat-form-field>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-12">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="step === 0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div style="width:100%;">Standards  <div *ngIf="detailsModel.Standards?.length > 0"
+                                    class="counterBadge">{{ detailsModel.Standards.length }}</div>                            
+                                </div>
+                            </mat-panel-title>                           
+                        </mat-expansion-panel-header>
+                        <ng-select [items]="standards" bindLabel="StandardName" bindValue="ID" [multiple]="true"
+                        [closeOnSelect]="true" [hideSelected]="true" placeholder="Select Standards *"
+                        [(ngModel)]="detailsModel.Standards" name="Standards" appendTo="body">
+                    </ng-select>
+                    </mat-expansion-panel>                
+
+                    <mat-expansion-panel [expanded]="step === 1">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div style="width:100%;">Options                          
+                                </div>
+                            </mat-panel-title>                           
+                        </mat-expansion-panel-header>
+                        <mat-checkbox name="IsUKASAccredited" class="example-margin" [(ngModel)]="detailsModel.IsUKASAccredited"
+                        [labelPosition]="after">
+                        UKAS Accredited
+                    </mat-checkbox>
+                        <ng-select [items]="bottleTypes" bindLabel="Description" bindValue="ID" [multiple]="false"
+                            [closeOnSelect]="true" [hideSelected]="true" placeholder="Select Bottle Type"
+                            [(ngModel)]="detailsModel.BottleType" name="BottleTypes" appendTo="body">
+                        </ng-select>    
+                        <mat-form-field class="example-full-width" style="width:100%;">
+                            <input matInput placeholder="Bottle Qty" type="number"  [(ngModel)]="detailsModel.Qty" name="Qty" >
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" style="width:100%;">
+                            <input matInput type="number" placeholder="Turnaround Time (hrs)" [(ngModel)]="detailsModel.Turnaround" name="Turnaround" >
+                        </mat-form-field>                      
+                
+                    </mat-expansion-panel>                
+                </mat-accordion>
+            </div>
+            
+        </div>
+    </form>

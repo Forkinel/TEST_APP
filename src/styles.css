@@ -1,0 +1,119 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+  }
+  
+  code {
+    color: #e01a76;
+  }
+  
+  .btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+  }
+  
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  
+  
+  .ng-sidebar--opened {
+    box-shadow: 0 0 2.5em rgba(85,85,85,0.5);
+    min-width:15%;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.noneFound{
+  text-align: center;
+    font-size: 2em;
+}
+
+.mat-checkbox-background
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent 
+.mat-ripple-element, 
+.mat-checkbox-background .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent 
+.mat-ripple-element {
+  background: #2da828!important;
+}
+
+/* i.far{
+  font-size: 1.5em;
+} */
+
+.fa-check-circle{
+  color:green 
+}
+
+.fa-times-circle{
+  color:red 
+}
+
+.counterBadge {
+    /* display: inline-block; */
+    float: right;
+    border-radius: 15px;
+    width: 1.5em;
+    background-color: green;
+    color: white;
+    text-align: center;
+}
+
+.fa-check-circle, .fa-times-circle
+{ 
+  font-size: 2em;
+  padding-left:20px;
+}
+
+
+.mat-cell.header-center, .mat-header-cell.header-center 
+{
+  text-align: center;
+}
+
+.actionButtons {
+  text-align: end;
+}
+.actionButtons > div
+{
+  display: inline-block; 
+  cursor: pointer;
+  font-size: 2em;
+  padding-left:10px;
+  
+}
+
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:  rgba(0, 0, 0, 0.28);/* Black background with opacity */
+  opacity: 0.75;
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: progress; /* Add a pointer on hover */
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 150px;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

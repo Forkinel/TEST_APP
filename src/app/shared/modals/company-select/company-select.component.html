@@ -1,0 +1,15 @@
+
+
+<h1 mat-dialog-title>Multiple Companies Available<BR></h1>
+<div mat-dialog-content>
+  <p>Please make a selection</p>
+    <div class="select-company-item" *ngFor="let company of companyList" (click)="SelectCompany(company.ID)">
+        {{company.Name}}
+    </div>
+
+</div>
+
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>   
+</mat-dialog-actions>

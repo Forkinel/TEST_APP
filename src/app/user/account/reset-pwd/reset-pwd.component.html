@@ -1,0 +1,16 @@
+<form #formData='ngForm' class="mb-4" autocomplete="off" (ngSubmit)="onClickSubmit(form.value)" >
+    <div class="form-group">
+        <label>Password</label>
+        <input #Password="ngModel" name="Password" ngModel  class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>ConfirmPassword</label>
+        <input type="ConfirmPassword" #ConfirmPassword="ngModel" name="ConfirmPassword" ngModel  class="form-control" required> 
+    </div>
+    <div class="form-row">
+        <div class="form-group" style="width:100%">
+            <button type="submit" class="btn btn-lg btn-block btn-success" >Submit Password</button>
+        </div>
+    </div>
+</form>
+        

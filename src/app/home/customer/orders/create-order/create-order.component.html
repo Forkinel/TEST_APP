@@ -1,0 +1,128 @@
+<!-- <p>company ID = {{companyID}}</p> -->
+<div class="row">
+  <div class="col-md-10">
+
+  </div>
+  <div class="col-md-2">
+    <button mat-raised-button (click)="goBack()">Back</button>
+  </div>
+</div>
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+
+    <ng-template matStepLabel>Site/s</ng-template>
+
+    <ng-select [items]="sites" bindLabel="SiteName" bindValue="ID" [multiple]="false" [closeOnSelect]="true"
+      [hideSelected]="true" placeholder="Select Site *" [(ngModel)]="selectedSites" name="Sites" appendTo="body"
+     (add)="AddSite($event)"(remove)="RemoveSite($event)" (clear)="ClearSites()" (change)="GetSiteKits($event.ID)" >
+    </ng-select>
+
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+
+    <ng-template matStepLabel>Tests</ng-template>
+
+    <ng-select [items]="tests" bindLabel="TestName" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
+      placeholder="Select Tests *" [(ngModel)]="selectedTests" name="Tests" appendTo="body" (add)="AddTest($event)"
+      (remove)="RemoveTest($event)" (clear)="ClearTests()">
+    </ng-select>
+
+    <div class="row justify-content-center" *ngFor="let testObj of orderObj.Tests; let i = index">
+      <div class="col-md-6" style="text-align: end;">
+        {{testObj.TestName}}
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" style="width:8%;">
+          <input matInput placeholder="Qty" [(ngModel)]="testObj.Qty" name="Qty" type="number" min="1" >
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+
+  <ng-template matStepLabel>Kits</ng-template>
+
+  <ng-select [items]="kits" bindLabel="KitName" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
+    placeholder="Select Kits *" [(ngModel)]="selectedKits" name="Kits" appendTo="body" (add)="AddKit($event)"
+    (remove)="RemoveKit($event)" (clear)="ClearKits()">
+  </ng-select>
+
+  <div class="row justify-content-center" *ngFor="let kitObj of orderObj.Kits; let i = index">
+    <div class="col-md-6" style="text-align: end;">
+      {{kitObj.KitName}}
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="example-full-width" style="width:8%;">
+        <input matInput placeholder="Qty" [(ngModel)]="kitObj.Qty" name="Qty" type="number" min="1" >
+      </mat-form-field>
+    </div>
+
+  </div>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finish</ng-template>
+    
+    <div  *ngIf="orderObj.Sites?.length > 0 ">
+      <h3>
+        Review Order
+      </h3>
+   
+    <mat-card style="background-color: #28a7458f;">
+      <mat-card-title>
+        Sites
+        <mat-card-content>
+         <div class="row" *ngFor="let site of orderObj.Sites">
+           <div class="col-md-12">{{site.SiteName}}</div>          
+         </div>  
+        </mat-card-content>
+      </mat-card-title>
+      <mat-card-title *ngIf="orderObj.Tests?.length > 0">
+        Tests
+        <mat-card-content>
+         <div class="row" *ngFor="let test of orderObj.Tests">
+           <div class="col-md-12">{{test.TestName}} x {{test.Qty}}</div>          
+         </div>  
+        </mat-card-content>
+      </mat-card-title>
+      <mat-card-title  *ngIf="orderObj.Kits?.length > 0">
+        Kits
+        <mat-card-content>
+         <div class="row" *ngFor="let kit of orderObj.Kits">
+           <div class="col-md-12">{{kit.KitName}} x {{kit.Qty}}</div>          
+         </div>  
+        </mat-card-content>
+      </mat-card-title>
+      <div style="text-align: center;"><button mat-button style="background-color: green;color: white; width:25%;" (click)="CreateOrder()">Create Order</button></div>
+   
+    </mat-card>
+  
+  </div>
+
+  <Div *ngIf="orderObj.Sites?.length === 0" Style="text-align: center;">
+    <h1>No order data to review</h1>
+   </Div>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="Reset();stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+{{orderObj | json}}

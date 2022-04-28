@@ -1,0 +1,68 @@
+<div *ngIf="loaderService.isLoading | async">
+  <div id="overlay">
+    <mat-spinner class="content"></mat-spinner>
+  </div>
+</div>
+<div class="row" style="padding-top:25px;">
+    <div class="col-md-12">
+      <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field fxFlex="100%">
+          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Find...">         
+        </mat-form-field>
+      
+        <button mat-raised-button (click)="addNewUser()" style="float: right;">Add New User</button>
+        <button mat-raised-button (click)="CloseDetails()" style="float: right;"  *ngIf="selectedUserID != ''" >Close Details</button>
+      </div>
+      
+    </div>
+  </div>
+  <div class="row">  
+    <div [ngClass]="{'col-md-12': selectedUserID == '', 'col-md-6': selectedUserID != ''}">
+      <div class="well">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%" [hidden]="!dataSource.data" matSort (matSortChange)="customSort($event)">             
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >FullName</th>
+            <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >UserName</th>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="email" *ngIf="selectedUserID == ''">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Email</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>  
+          <ng-container matColumnDef="role" *ngIf="selectedUserID == ''">
+            <th mat-header-cell *matHeaderCellDef >Role</th>
+            <td mat-cell *matCellDef="let element" > {{element.roles}}    
+            </td>
+          </ng-container>            
+          <ng-container matColumnDef="isActive" *ngIf="selectedUserID == ''">
+            <th mat-header-cell *matHeaderCellDef width="5%" class="header-center">Active</th>
+            <td mat-cell *matCellDef="let element">
+              <i *ngIf="element.isActive" Class="far fa-check-circle"></i>
+              <i *ngIf="!element.isActive"class="far fa-times-circle"></i>
+            </td>
+          </ng-container>  
+          <ng-container matColumnDef="actionButtons">
+            <th mat-header-cell *matHeaderCellDef width="5%" class="header-center" ></th>
+            <td mat-cell *matCellDef="let element" class="actionButtons" >
+              <div (click)="GetUserDetails(element.id)" ><i class="fas fa-info-circle"></i></div>
+            </td>
+          </ng-container>     
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        </table>
+  
+      </div>
+      <mat-paginator [pageSize]="2" [pageSizeOptions]="[2,5, 10, 20, 50]">
+      </mat-paginator>
+    </div>
+    <div class="col-md-6" *ngIf="selectedUserID != ''">
+      <div class="well">
+     <div><app-user-details [UserID]="selectedUserID" (parentEvent)="parentEvent_CloseDetails($event)"></app-user-details></div>
+      </div>
+    </div>
+  </div>

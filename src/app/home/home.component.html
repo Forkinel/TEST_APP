@@ -1,0 +1,61 @@
+<!-- 
+  <div class="card m-5" style="width:15rem;" *ngIf="userDetails">
+    <ul class="list-group">
+        <li class="list-grou-item">UserName : {{userDetails.userName}}</li>
+        <li class="list-grou-item">Fullname : {{userDetails.fullName}}</li>
+        <li class="list-grou-item">Email : {{userDetails.email}}</li>
+    </ul>
+  </div> 
+-->
+
+
+<body>
+
+    <ng-sidebar-container style="height: 100vh;">
+      <!-- A sidebar -->
+
+      <ng-sidebar [(opened)]="_opened" mode="push">
+
+        <div *ngFor="let item of panelLinks;" class="sidebarButtonContainer">
+          <button  type="button" class="btn btn-light" routerLink="{{item.link}}">{{item.label}}</button>         
+        </div>
+
+      </ng-sidebar>
+
+      <!-- Page content -->
+      <div ng-sidebar-content>
+        <header>
+          <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="burgercontainer" (click)="_toggleSidebar($event)">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+            <div class="container">
+
+              <div class="navbar-brand"><img src="assets/img/2030Logo_Hdr.png" alt="Alternate Text" style="height:60px;" /></div>
+
+              <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+                   [ngClass]="{ show: isExpanded }">
+                <ul class="navbar-nav flex-grow">
+                  <li class="nav-item"
+                      [routerLinkActive]="['link-active']"
+                      [routerLinkActiveOptions]="{ exact: true }">
+                    <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+                  </li>
+                  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <div class="container" >
+          <router-outlet></router-outlet>
+         
+        </div>
+      </div>
+
+    </ng-sidebar-container>
+
+</body>
+ 

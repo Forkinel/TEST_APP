@@ -1,0 +1,58 @@
+
+
+<!-- Template driven form -->
+<form #detailsForm="ngForm" *ngIf="dataLoaded | async" (ngSubmit)="Save(detailsForm.value)">
+    <div class="form-group">
+        <div class="row">
+            <div class=col-md-6>
+                <mat-checkbox name="IsActive" class="example-margin" [(ngModel)]="detailsModel.IsActive"
+                    [labelPosition]="after">
+                    Active
+                </mat-checkbox>
+            </div>
+            <div class="col-md-6">
+                <button mat-raised-button color="primary" type="submit" style="float:right"
+                    [disabled]="!detailsForm.form.valid">Save</button>
+            </div>
+        </div>
+        <mat-form-field class="example-full-width" style="width:100%;">
+            <input matInput placeholder="Standard Name" [(ngModel)]="detailsModel.StandardName" name="StandardName">
+        </mat-form-field>
+
+        <ng-select [items]="uom" bindLabel="UOM" bindValue="ID" [closeOnSelect]="true" [hideSelected]="true"
+            placeholder="Select Unit Of Measurement" [(ngModel)]="detailsModel.UnitsOfMeasurement_ID" name="uomList">
+        </ng-select>
+
+        <mat-form-field class="example-full-width" style="width:100%;">
+            <input matInput placeholder="Text based Limit..eg Clear" [(ngModel)]="detailsModel.TextLimit"
+                name="TextLimit">
+        </mat-form-field>
+
+        <div class="row">
+            <div class="col-md-3" style="top: -6px;">
+                <ng-select [items]="lSymbol" bindLabel="Symbol" bindValue="ID" [closeOnSelect]="true"
+                    [hideSelected]="true" placeholder="Symbol" [(ngModel)]="detailsModel.LowerLimit_Symbols_ID"
+                    name="lSymbolList">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width" style="width:100%;">
+                    <input matInput placeholder="Lower Limit" [(ngModel)]="detailsModel.LowerLimitValue"
+                        name="LowerLimitValue">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3" style="top: -6px;">
+                <ng-select [items]="uSymbol" bindLabel="Symbol" bindValue="ID" [closeOnSelect]="true"
+                    [hideSelected]="true" placeholder="Symbol" [(ngModel)]="detailsModel.UpperLimit_Symbols_ID"
+                    name="uSymbolList">
+                </ng-select>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width" style="width:100%;">
+                    <input matInput placeholder="Upper Limit" [(ngModel)]="detailsModel.UpperLimitValue"
+                        name="UpperLimitValue">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,115 @@
+
+
+<!-- Template driven form -->
+<form #detailsForm="ngForm" *ngIf="dataLoaded | async" (ngSubmit)="Save(detailsForm.value)">
+    <!-- 
+    <div> user ID = {{detailsModel.id}}</div> -->
+
+    <div class="row">
+        <div class=col-md-5>
+            <mat-checkbox name="IsActive" class="example-margin" [(ngModel)]="detailsModel.IsActive"
+                [labelPosition]="after">
+                Active
+            </mat-checkbox>
+            <br>
+            <mat-checkbox name="IsStaff" class="example-margin" [(ngModel)]="detailsModel.IsStaff"
+            [labelPosition]="after">
+            2030 Staff
+        </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+            <button mat-raised-button color="primary" type="submit" style="float:right"
+                [disabled]="!detailsForm.form.valid">Save</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <mat-form-field class="example-full-width" style="width:100%;">
+                <input matInput placeholder="UserName" [(ngModel)]="detailsModel.UserName" name="UserName" required>
+            </mat-form-field>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-5">
+            <mat-form-field class="example-full-width" style="width:100%;">
+                <input matInput placeholder="Full Name" [(ngModel)]="detailsModel.FullName" name="FullName" required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <mat-form-field class="example-full-width" style="width:100%;">
+                <input matInput placeholder="Email" [(ngModel)]="detailsModel.Email" name="Email" [email]="true"
+                    required>
+            </mat-form-field>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <mat-form-field class="example-full-width" style="width:100%;" *ngIf="!passwordDisabled">
+                <input matInput placeholder="Password" [(ngModel)]="detailsModel.Password" name="Password"
+                    required="{{passwordRequired}}" disabled="{{passwordDisabled}}">
+            </mat-form-field>
+
+            <button *ngIf="passwordDisabled" mat-raised-button class="btn btn-danger" style="float:right;" type="button" (click)="ResetPassword()">Reset Password</button>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-accordion class="example-headers-align">
+                <mat-expansion-panel [expanded]="step === 0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div style="width:100%;">Roles <div *ngIf="selectedRoles?.length > 0" class="counterBadge">
+                                    {{ selectedRoles.length }}</div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-select [items]="roles" bindLabel="RoleName" bindValue="RoleName" [multiple]="true"
+                        [closeOnSelect]="true" [hideSelected]="true" placeholder="Select Roles *"
+                        [(ngModel)]="selectedRoles" name="Roles" appendTo="body">
+                    </ng-select>
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 1" >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div style="width:100%;">Companies <div *ngIf="selectedCompanies?.length > 0"
+                                    class="counterBadge">{{ selectedCompanies.length }}</div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-select [items]="companies" bindLabel="Name" bindValue="ID" [multiple]="true"
+                        [closeOnSelect]="true" [hideSelected]="true" placeholder="Select Companies *"
+                        [(ngModel)]="selectedCompanies" name="Companies" appendTo="body">
+                    </ng-select>
+                </mat-expansion-panel>
+                <mat-expansion-panel [expanded]="step === 2">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div style="width:100%;">Options
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-checkbox name="AllowedToViewPricing" class="example-margin" [(ngModel)]="detailsModel.AllowedToViewPricing"
+                                [labelPosition]="after">
+                                Allowed To View Pricing
+                            </mat-checkbox>
+                        <br>
+                            <mat-checkbox name="ShowAllProjects" class="example-margin" [(ngModel)]="detailsModel.ShowAllProjects"
+                                [labelPosition]="after">
+                                Show All Results
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+
+</form>

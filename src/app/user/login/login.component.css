@@ -1,0 +1,5 @@
+.btn-success.disabled, .btn-success:disabled {
+    color: #fff;
+    background-color: #dae0e5;
+    border-color: #28a74547;
+    }
