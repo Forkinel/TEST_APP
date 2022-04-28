@@ -1,1 +1,1 @@
-This is an app writtemn in angular as a very siple prottype of what i think they are after. It is limited and doesnt functionwith the db (which i have lost and need to recreate). you can still run it but it wont go very far without the DB :-(
+This is an app written in angular as a very simple prototype of what i thought they would require (made without any major input from mgmt). It is limited and doesnt function without the db (which i have lost and need to recreate). you can still run it but it wont go very far without the DB :-(
